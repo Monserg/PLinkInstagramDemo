@@ -24,7 +24,13 @@ class FeedsShowViewController: UIViewController {
     
     
     // MARK: - IBOutlets
-    // @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var label: UILabel! {
+        didSet {
+            label.text = user?.fullName
+            label.sizeToFit()
+        }
+    }
+
     
     
     // MARK: - Object lifecycle
@@ -74,6 +80,7 @@ class FeedsShowViewController: UIViewController {
         super.viewDidLoad()
         
         viewSettingsDidLoad()
+        
     }
     
     
