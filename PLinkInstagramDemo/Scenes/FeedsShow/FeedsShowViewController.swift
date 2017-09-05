@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import SnapKit
 
 // MARK: - Input & Output protocols
 protocol FeedsShowDisplayLogic: class {
@@ -85,6 +86,8 @@ class FeedsShowViewController: UIViewController {
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        prepareConstrains()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +110,12 @@ class FeedsShowViewController: UIViewController {
 
         FMDBManager.shared.databaseClean()
         feedsDidLoad(withScrollingData: false)
+    }
+    
+    func prepareConstrains() {
+        collectionView.snp.makeConstraints {
+            $0.edges.equalTo(self.view).inset(UIEdgeInsetsMake(20, 0, 0, 0))
+        }
     }
     
     func feedsDidLoad(withScrollingData scrollingData: Bool) {
