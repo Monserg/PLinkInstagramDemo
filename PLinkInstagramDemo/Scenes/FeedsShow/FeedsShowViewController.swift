@@ -134,6 +134,7 @@ class FeedsShowViewController: UIViewController {
     
         // Handler select Feed cell
         collectionView.collectionViewControllerManager!.handlerCellSelectCompletion = { feed in
+            self.router?.dataStore?.feedSelected = feed as! Feed
             self.router?.transitionToFeedShowScene()
         }
         

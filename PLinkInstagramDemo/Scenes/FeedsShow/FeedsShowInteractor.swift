@@ -19,6 +19,7 @@ protocol FeedsShowBusinessLogic {
 
 protocol FeedsShowDataStore {
     var feeds: [Feed]! { get set }
+    var feedSelected: Feed! { get set }
 }
 
 class FeedsShowInteractor: FeedsShowBusinessLogic, FeedsShowDataStore {
@@ -28,6 +29,7 @@ class FeedsShowInteractor: FeedsShowBusinessLogic, FeedsShowDataStore {
     
     // Confirm FeedsShowDataStore protocol
     var feeds: [Feed]!
+    var feedSelected: Feed!
     
     
     // MARK: - Business logic implementation

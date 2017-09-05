@@ -34,8 +34,13 @@ class FeedShowInteractor: FeedShowBusinessLogic, FeedShowDataStore {
         worker = FeedShowWorker()
         worker?.doSomeWork()
         
-        let comment = FMDBManager.shared.commentLoad(withParameters: (nil, feed.codeID))
-        let responseModel = FeedShowModels.Feed.ResponseModel(feedDisplayed: (feed, comment?.text ?? ""))
+        var text: String?
+        
+        if feed.comments > 0 {
+            text = FMDBManager.shared.commentLoad(withParameters: (nil, feed.codeID))?.text
+        }
+        
+        let responseModel = FeedShowModels.Feed.ResponseModel(feedDisplayed: (feed, text ?? ""))
         presenter?.prepareToDisplayFeedComment(fromResponseModel: responseModel)
     }
 }

@@ -18,7 +18,7 @@ import UIKit
 }
 
 protocol FeedsShowDataPassing {
-    var dataStore: FeedsShowDataStore? { get }
+    var dataStore: FeedsShowDataStore? { get set }
 }
 
 class FeedsShowRouter: NSObject, FeedsShowRoutingLogic, FeedsShowDataPassing {
@@ -40,13 +40,13 @@ class FeedsShowRouter: NSObject, FeedsShowRoutingLogic, FeedsShowDataPassing {
     
     // MARK: - Navigation
     func navigateToFeedShowScene(fromSource source: FeedsShowViewController, toDestination destination: FeedShowViewController) {
-        source.show(destination, sender: nil)
+        source.navigationController?.pushViewController(destination, animated: true)
+//        show(destination, sender: nil)
     }
     
     
     // MARK: - Passing data
     func dataPassToFeedShowScene(source: FeedsShowDataStore, destination: inout FeedShowDataStore) {
-        let selectedRow = viewController?.collectionView.indexPathsForSelectedItems?.first?.row
-        destination.feed = source.feeds[selectedRow!]
+        destination.feed = source.feedSelected
     }
 }

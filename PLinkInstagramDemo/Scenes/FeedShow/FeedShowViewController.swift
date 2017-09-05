@@ -26,53 +26,11 @@ class FeedShowViewController: UIViewController {
         
     
     // MARK: - IBOutlets
-    @IBOutlet weak var contentView: UIView! {
-        didSet {
-            feedImageView.snp.makeConstraints {
-                $0.edges.equalTo(view).inset(UIEdgeInsetsMake(0, 0, 15, 0))
-                $0.aspectRatio(3, by: 4, self: feedImageView)
-            }
-        }
-    }
-    
-    @IBOutlet weak var feedImageView: UIImageView! {
-        didSet {
-            feedImageView.snp.makeConstraints {
-                $0.size.equalTo(contentView)
-            }
-        }
-    }
-    
-    @IBOutlet weak var likesImageView: UIImageView! {
-        didSet {
-            likesImageView.snp.makeConstraints {
-                $0.size.equalTo(35)
-                $0.edges.equalTo(contentView).inset(UIEdgeInsetsMake(0, 0, 15, 40))
-            }
-        }
-    }
-    
-    @IBOutlet weak var likesLabel: UILabel! {
-        didSet {
-            likesLabel.snp.makeConstraints {
-                $0.left.equalTo(likesImageView).offset(8)
-                $0.center.equalTo(likesImageView)
-            }
-        }
-    }
-
-    @IBOutlet weak var lastCommentLabel: UILabel! {
-        didSet {
-            lastCommentLabel.numberOfLines = 0
-            lastCommentLabel.textAlignment = .center
-            
-            // Set Constraints
-            lastCommentLabel.snp.makeConstraints {
-                $0.edges.equalTo(self.view).inset(UIEdgeInsetsMake(0, 40, 0, 40))
-            }
-        }
-    }
-
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var feedImageView: UIImageView!
+    @IBOutlet weak var likesImageView: UIImageView!
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var lastCommentLabel: UILabel!
     
     
     // MARK: - Object lifecycle
@@ -122,7 +80,7 @@ class FeedShowViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = NSLocalizedString("Feed", comment: "Title of selected feed")
-        viewSettingsDidLoad()
+        prepareConstrains()
     }
     
     
@@ -142,8 +100,6 @@ class FeedShowViewController: UIViewController {
                                     self.feedImageView.kf.cancelDownloadTask()
         })
         
-        likesImageView.image = UIImage.init(named: feedDisplayed.feed.likes > 0 ? "icon-likes-enabled" : "icon-likes-disable")
-        
         if feedDisplayed.feed.likes == 0 {
             likesLabel.isHidden = true
         } else {
@@ -154,7 +110,45 @@ class FeedShowViewController: UIViewController {
             lastCommentLabel.isHidden = true
         } else {
             lastCommentLabel.text = feedDisplayed.text
+            lastCommentLabel.numberOfLines = 0
+            lastCommentLabel.textAlignment = .center
         }
+    }
+    
+    func prepareConstrains() {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        contentView.snp.makeConstraints {
+            $0.top.equalTo(view).offset(0)
+            $0.left.equalTo(view).offset(0)
+            $0.right.equalTo(view).offset(0)
+            $0.aspectRatio(3, by: 4, self: contentView)
+        }
+        
+        feedImageView.snp.makeConstraints {
+            $0.size.equalTo(contentView)
+            $0.center.equalTo(contentView)
+        }
+        
+        likesImageView.snp.makeConstraints {
+            $0.size.equalTo(35)
+            $0.bottom.equalTo(contentView).offset(-15)
+            $0.right.equalTo(contentView).offset(-40)
+        }
+        
+        likesLabel.snp.makeConstraints {
+            $0.size.width.equalTo(35)
+            $0.center.equalTo(likesImageView)
+        }
+        
+        // Set Constraints
+        lastCommentLabel.snp.makeConstraints {
+            $0.top.equalTo(contentView).offset(40)
+            $0.left.equalTo(view).offset(0)
+            $0.right.equalTo(view).offset(0)
+        }
+        
+        viewSettingsDidLoad()
     }
 }
 

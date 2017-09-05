@@ -63,17 +63,17 @@ public struct Feed: InitCellParameters {
         self.likes          =   likesCount
         self.comments       =   commentsCount
         
-//        // Get Comments model
-//        RestAPIManager.shared.requestDidRun(.loadLastCommentByMediaID([fieldAccessToken: accessToken], id)) { (responseAPI) in
-//            if let data = responseAPI!.data as? [String: Any], data.count > 0 {
-//                // Create new Comments object
-//                do {
-//                    let lastCommentModel = try Comment(json: data, mediaID: id)
-//                    _ = FMDBManager.shared.commentLoad(withParameters: (lastCommentModel, nil))
-//                } catch {
-//                    print(error.localizedDescription)
-//                }
-//            }
-//        }
+        // Get Comments model
+        RestAPIManager.shared.requestDidRun(.loadLastCommentByMediaID([fieldAccessToken: accessToken], id)) { (responseAPI) in
+            if let data = responseAPI!.data as? [String: Any], data.count > 0 {
+                // Create new Comments object
+                do {
+                    let lastCommentModel = try Comment(json: data, mediaID: id)
+                    _ = FMDBManager.shared.commentLoad(withParameters: (lastCommentModel, nil))
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }

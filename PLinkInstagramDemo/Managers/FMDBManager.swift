@@ -59,11 +59,13 @@ class FMDBManager: NSObject {
                     let userQueryCreate = "CREATE TABLE USER (\(fieldCodeID) text primary key not null, \(fieldUserName) text not null, \(fieldFullName) text not null, \(fieldAccessToken) text not null)"
                     let paginationQueryCreate = "CREATE TABLE PAGINATION (\(fieldNextMaxID) text primary key not null, \(fieldNextURL) text not null)"
                     let feedsQueryCreate = "CREATE TABLE FEEDS (\(fieldCodeID) text primary key not null, \(fieldURL) text not null, \(fieldHasLiked) bool not null default false, \(fieldLikes) integer not null default 0, \(fieldComments) integer not null default 0)"
+                    let commentQueryCreate = "CREATE TABLE COMMENT (\(fieldCodeID) text primary key not null, \(fieldMediaID) text not null, \(fieldText) text not null)"
                     
                     do {
                         try database.executeUpdate(userQueryCreate, values: nil)
                         try database.executeUpdate(paginationQueryCreate, values: nil)
                         try database.executeUpdate(feedsQueryCreate, values: nil)
+                        try database.executeUpdate(commentQueryCreate, values: nil)
                         created = true
                     } catch {
                         print("Could not create table.")
@@ -162,7 +164,9 @@ class FMDBManager: NSObject {
                                        mediaID: mediaIDValue,
                                        text: commentResults.string(forColumn: fieldText)!)
             } else {
-                commentCreate(parameters.comment!)
+                if let comment = parameters.comment {
+                    commentCreate(comment)
+                }
             }
             
             database.close()
