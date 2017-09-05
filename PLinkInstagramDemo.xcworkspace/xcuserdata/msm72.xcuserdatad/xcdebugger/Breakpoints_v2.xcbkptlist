@@ -218,45 +218,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PLinkInstagramDemo/Managers/FMDBManager.swift"
-            timestampString = "526332604.479961"
+            timestampString = "526333147.771219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "commentLoad(withParameters:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PLinkInstagramDemo.FMDBManager.commentLoad (withParameters : (comment : Swift.Optional&lt;PLinkInstagramDemo.Comment&gt;, mediaID : Swift.Optional&lt;Swift.String&gt;)) -&gt; Swift.Optional&lt;PLinkInstagramDemo.Comment&gt;"
-                  moduleName = "PLinkInstagramDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/msm72/MEGAsync/MEGA_Yahoo.com/Swift/Codes%20demo/PLink/app/PLinkInstagramDemo/PLinkInstagramDemo/Managers/FMDBManager.swift"
-                  timestampString = "526333053.111414"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "2554">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PLinkInstagramDemo.FMDBManager.commentLoad (withParameters : (comment : Swift.Optional&lt;PLinkInstagramDemo.Comment&gt;, mediaID : Swift.Optional&lt;Swift.String&gt;)) -&gt; Swift.Optional&lt;PLinkInstagramDemo.Comment&gt;"
-                  moduleName = "PLinkInstagramDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/msm72/MEGAsync/MEGA_Yahoo.com/Swift/Codes%20demo/PLink/app/PLinkInstagramDemo/PLinkInstagramDemo/Managers/FMDBManager.swift"
-                  timestampString = "526333053.112903"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "2609">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

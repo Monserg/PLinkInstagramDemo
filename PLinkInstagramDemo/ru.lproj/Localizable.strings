@@ -1,6 +1,12 @@
 /* Create User object error title */
 "Error" = "Ошибка";
 
+/* Title of selected feed */
+"Feed" = "Лента";
+
+/* No comment provided by engineer. */
+"Loading Data" = "Загрузка данных";
+
 /* Action button title */
 "Ok" = "Ok";
 
