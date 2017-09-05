@@ -14,7 +14,7 @@ import UIKit
 
 // MARK: - Input & Output protocols
 @objc protocol FeedsShowRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func transitionToFeedShowScene()
 }
 
 protocol FeedsShowDataPassing {
@@ -28,29 +28,25 @@ class FeedsShowRouter: NSObject, FeedsShowRoutingLogic, FeedsShowDataPassing {
     
     
     // MARK: - Routing
-    //func routeToSomewhere(segue: UIStoryboardSegue?) {
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func transitionToFeedShowScene() {
+        let storyboard = UIStoryboard(name: "FeedShow", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "FeedShowVC") as! FeedShowViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        
+        dataPassToFeedShowScene(source: dataStore!, destination: &destinationDS)
+        navigateToFeedShowScene(fromSource: viewController!, toDestination: destinationVC)
+    }
     
     
     // MARK: - Navigation
-    //func navigateToSomewhere(source: FeedsShowViewController, destination: SomewhereViewController) {
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToFeedShowScene(fromSource source: FeedsShowViewController, toDestination destination: FeedShowViewController) {
+        source.show(destination, sender: nil)
+    }
     
     
     // MARK: - Passing data
-    //func passDataToSomewhere(source: FeedsShowDataStore, destination: inout SomewhereDataStore) {
-    //  destination.name = source.name
-    //}
+    func dataPassToFeedShowScene(source: FeedsShowDataStore, destination: inout FeedShowDataStore) {
+        let selectedRow = viewController?.collectionView.indexPathsForSelectedItems?.first?.row
+        destination.feed = source.feeds[selectedRow!]
+    }
 }

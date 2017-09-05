@@ -12,6 +12,7 @@ enum SerializationError: Error {
     case missing(String)
 }
 
+
 let fieldPagination                     =   "pagination"
 let fieldData                           =   "data"
 let fieldMeta                           =   "meta"
@@ -23,19 +24,46 @@ let fieldNextURL                        =   "next_url"
 let fieldCode                           =   "code"
 let fieldCodeID                         =   "id"
 let fieldFullName                       =   "full_name"
+let fieldUserID                         =   "userID"
 let fieldUserName                       =   "username"
+let fieldText                           =   "text"
+let fieldImages                         =   "images"
+let fieldHasLiked                       =   "user_has_liked"
+let fieldLikes                          =   "likes"
+let fieldComments                       =   "comments"
+let fieldMediaID                        =   "media_id"
+let fieldCount                          =   "count"
+let fieldMaxID                          =   "max_id"
+let fieldStandardResolution             =   "standard_resolution"
+let fieldURL                            =   "url"
+
+let fieldsSet: Set                      =   [fieldCodeID, fieldImages, fieldHasLiked, fieldLikes, fieldComments]
+
 
 var user: User? {
     set {}
     
     get {
-        return FMDBManager.shared.loadUser()
+        return FMDBManager.shared.userLoad()
+    }
+}
+
+var pagination: Pagination? {
+    set {}
+    
+    get {
+        return FMDBManager.shared.paginationLoad(nil)
     }
 }
 
 
 // Handlers
-//typealias HandlerPassUserCompletion     =   ((_ user: Any?) -> ())
+typealias HandlerPassDataCompletion     =   ((_ data: Any?) -> ())
+typealias HandlerSendButtonCompletion   =   (() -> ())
+
+// New Types
+typealias FeedDisplayed                 =   (feed: Feed, text: String)
+typealias CommentLoadParameters         =   (comment: Comment?, mediaID: String?)
 
 
 struct INSTAGRAM_IDS {
@@ -47,4 +75,5 @@ struct INSTAGRAM_IDS {
     static let INSTAGRAM_REDIRECT_URI   =   "http://plink.com.ua"
     static let INSTAGRAM_ACCESS_TOKEN   =   "access_token"
     static let INSTAGRAM_SCOPE          =   "likes+comments+relationships+public_content+follower_list"
+    static let INSTAGRAM_COUNT          =   3
 }

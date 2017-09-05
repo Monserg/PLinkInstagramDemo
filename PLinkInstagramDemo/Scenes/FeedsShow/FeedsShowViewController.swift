@@ -14,7 +14,7 @@ import UIKit
 
 // MARK: - Input & Output protocols
 protocol FeedsShowDisplayLogic: class {
-    func displaySomething(viewModel: FeedsShowModels.Something.ViewModel)
+    func feedsDisplay(fromViewModel viewModel: FeedsShowModels.Feeds.ViewModel)
 }
 
 class FeedsShowViewController: UIViewController {
@@ -22,15 +22,22 @@ class FeedsShowViewController: UIViewController {
     var interactor: FeedsShowBusinessLogic?
     var router: (NSObjectProtocol & FeedsShowRoutingLogic & FeedsShowDataPassing)?
     
+    var feeds = [Feed]()
+
     
     // MARK: - IBOutlets
-    @IBOutlet weak var label: UILabel! {
+    @IBOutlet weak var dataSourceEmptyView: UIView!
+    
+    @IBOutlet weak var collectionView: CollectionView! {
         didSet {
-            label.text = user?.fullName
-            label.sizeToFit()
+            collectionView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0)
+            collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(10, 0, 0, 0)
+            
+            if (collectionView.collectionViewControllerManager == nil) {
+                collectionView.collectionViewControllerManager = CollectionViewControllerManager.init(withCollectionView: collectionView, andEmptyMessageText: NSLocalizedString("Feeds list is empty", comment: ""))
+            }
         }
     }
-
     
     
     // MARK: - Object lifecycle
@@ -78,25 +85,87 @@ class FeedsShowViewController: UIViewController {
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewSettingsDidLoad()
-        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        viewSettingsDidLoad()
+    }
+
     
     // MARK: - Custom Functions
     func viewSettingsDidLoad() {
-        let requestModel = FeedsShowModels.Something.RequestModel()
+        // Load Feeds from FMDB
+        guard Connectivity.isConnectedToInternet() else {
+            self.feedsDidShow()
+            return
+        }
         
-        interactor?.doSomething(request: requestModel)
+        // Load Feeds from API
+        feeds = [Feed]()
+
+        FMDBManager.shared.databaseClean()
+        feedsDidLoad(withScrollingData: false)
+    }
+    
+    func feedsDidLoad(withScrollingData scrollingData: Bool) {
+        var parameters: [String: Any] = [ fieldCount: INSTAGRAM_IDS.INSTAGRAM_COUNT, fieldAccessToken: user!.accessToken ]
+        
+        if let maxID = pagination?.next_max_id {
+            parameters[fieldMaxID] = maxID
+        }
+        
+        guard Connectivity.isConnectedToInternet() else {
+            feedsDidShow()
+            return
+        }
+        
+        let feedsLoadRequestModel = FeedsShowModels.Feeds.RequestModel(parameters: parameters)
+        interactor?.feedsLoad(withRequestModel: feedsLoadRequestModel)
+    }
+
+    func feedsDidShow() {
+        // Setting CollectionViewControllerManager
+        feeds = FMDBManager.shared.feedsLoad()
+        collectionView.collectionViewControllerManager!.sectionsCount = 1
+        collectionView.collectionViewControllerManager!.dataSource = feeds
+        collectionView.reloadData()
+    
+        // Handler select Feed cell
+        collectionView.collectionViewControllerManager!.handlerCellSelectCompletion = { feed in
+            self.router?.transitionToFeedShowScene()
+        }
+        
+        // Handler Pull Refresh
+        collectionView.collectionViewControllerManager!.handlerPullRefreshCompletion = { _ in
+            // Reload Feeds from API
+            self.feeds = [Feed]()
+            self.feeds = FMDBManager.shared.feedsLoad()
+            self.feedsDidLoad(withScrollingData: true)
+        }
+        
+        // Handler Infinite Scrolling
+        collectionView.collectionViewControllerManager.handlerInfiniteScrollCompletion = { _ in
+            // Load More Feeds from API
+            self.feedsDidLoad(withScrollingData: true)
+        }
+        
+        collectionView.collectionViewControllerManager.pullRefreshDidFinish()
+    }
+    
+    
+    // MARK: - Transition
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.setNeedsDisplay()
+        collectionView.reloadData()
     }
 }
 
 
 // MARK: - FeedsShowDisplayLogic
 extension FeedsShowViewController: FeedsShowDisplayLogic {
-    func displaySomething(viewModel: FeedsShowModels.Something.ViewModel) {
-        // NOTE: Display the result from the Presenter
-        // nameTextField.text = viewModel.name
+    func feedsDisplay(fromViewModel viewModel: FeedsShowModels.Feeds.ViewModel) {
+        feedsDidShow()
     }
 }

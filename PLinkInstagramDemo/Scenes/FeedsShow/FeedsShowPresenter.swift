@@ -14,7 +14,7 @@ import UIKit
 
 // MARK: - Presentation Logic protocols
 protocol FeedsShowPresentationLogic {
-    func presentSomething(response: FeedsShowModels.Something.ResponseModel)
+    func prepareFeedsToDisplay(fromResponseModel responseModel: FeedsShowModels.Feeds.ResponseModel)
 }
 
 class FeedsShowPresenter: FeedsShowPresentationLogic {
@@ -23,8 +23,8 @@ class FeedsShowPresenter: FeedsShowPresentationLogic {
     
     
     // MARK: - Presentation Logic implementation
-    func presentSomething(response: FeedsShowModels.Something.ResponseModel) {
-        let viewModel = FeedsShowModels.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func prepareFeedsToDisplay(fromResponseModel responseModel: FeedsShowModels.Feeds.ResponseModel) {
+        let viewModel = FeedsShowModels.Feeds.ViewModel(feeds: responseModel.feeds)
+        viewController?.feedsDisplay(fromViewModel: viewModel)
     }
 }

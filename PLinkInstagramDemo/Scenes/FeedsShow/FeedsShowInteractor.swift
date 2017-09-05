@@ -14,26 +14,59 @@ import UIKit
 
 // MARK: - Business Logic protocols
 protocol FeedsShowBusinessLogic {
-    func doSomething(request: FeedsShowModels.Something.RequestModel)
+    func feedsLoad(withRequestModel requestModel: FeedsShowModels.Feeds.RequestModel)
 }
 
 protocol FeedsShowDataStore {
-    //var name: String { get set }
+    var feeds: [Feed]! { get set }
 }
 
 class FeedsShowInteractor: FeedsShowBusinessLogic, FeedsShowDataStore {
     // MARK: - Properties
     var presenter: FeedsShowPresentationLogic?
     var worker: FeedsShowWorker?
-    //var name: String = ""
+    
+    // Confirm FeedsShowDataStore protocol
+    var feeds: [Feed]!
     
     
     // MARK: - Business logic implementation
-    func doSomething(request: FeedsShowModels.Something.RequestModel) {
+    func feedsLoad(withRequestModel requestModel: FeedsShowModels.Feeds.RequestModel) {
         worker = FeedsShowWorker()
         worker?.doSomeWork()
         
-        let responseModel = FeedsShowModels.Something.ResponseModel()
-        presenter?.presentSomething(response: responseModel)
+        feeds = [Feed]()
+        
+        RestAPIManager.shared.requestDidRun(.loadFeedsByAccessToken(requestModel.parameters)) { (responseAPI) in
+            if let feedsList = responseAPI?.data as? [[String: Any]], feedsList.count > 0 {
+                // Pagination
+                if let pagination = responseAPI?.pagination {
+                    _ = FMDBManager.shared.paginationLoad(pagination)
+                }
+                
+                // Feeds
+                for feedJSONs in feedsList {
+                    // Filter & create new json
+                    var json = [String: Any]()
+                    
+                    for dictionary in feedJSONs {
+                        if fieldsSet.contains(dictionary.key) {
+                            json[dictionary.key] = dictionary.value
+                        }
+                    }
+                    
+                    do {
+                        let feed = try Feed(json: json, withAccessToken: user!.accessToken)
+                        _ = FMDBManager.shared.feedLoad(feed)
+                            self.feeds.append(feed)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+                
+                let responseModel = FeedsShowModels.Feeds.ResponseModel(feeds: self.feeds)
+                self.presenter?.prepareFeedsToDisplay(fromResponseModel: responseModel)
+            }
+        }
     }
 }

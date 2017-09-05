@@ -22,18 +22,18 @@ public struct Pagination {
     
     // Optional initializer
     // Takes a dictionary of type [String: Any] for key 'pagination'
-//    public init(json: [String: Any]) throws {
-//        // 1. Get name and link values
-//        guard let container = json["im:name"] as? [String: Any], let name = container["label"] as? String else {
-//            throw SerializationError.missing("name")
-//        }
-//        
-//        guard let id = json["id"] as? [String: Any], let link = id["label"] as? String else {
-//            throw SerializationError.missing("link")
-//        }
-//        
-//        // 2. Set parsed values on the model App properties
-//        self.name = name
-//        self.link = link
-//    }
+    public init(json: [String: Any]) throws {
+        // 1. Get values
+        guard let id = json[fieldNextMaxID] as? String else {
+            throw SerializationError.missing(fieldNextMaxID)
+        }
+        
+        guard let url = json[fieldNextURL] as? String else {
+            throw SerializationError.missing(fieldNextURL)
+        }
+        
+        // 2. Set parsed values on the model App properties
+        self.next_max_id    =   id
+        self.next_url       =   url
+    }
 }

@@ -14,23 +14,32 @@ typealias RequestParametersType = (method: HTTPMethod, suffixStringURL: String, 
 
 enum RequestType {
     // API - Users endpoints
+    case loadFeedsByAccessToken([String: Any])
     case loadUserInfoByAccessToken([String: Any])
-//    case locationByAddressString([String: Any])
     
+    // API - Comments endpoints
+    case loadLastCommentByMediaID([String: Any], String)
+
 
     func introduced() -> RequestParametersType {
         // Parametes named such as in Postman
         switch self {
         // API - Users endpoints
-        case .loadUserInfoByAccessToken(let params):    return (method: .get,
-                                                                suffixStringURL: "/users/self",
-                                                                responseDataType: .DataDictionary,
-                                                                parameters: params)
+        case .loadFeedsByAccessToken(let params):           return (method: .get,
+                                                                    suffixStringURL: "/users/self/media/recent",
+                                                                    responseDataType: .DataArray,
+                                                                    parameters: params)
             
-//        case .locationByAddressString(let params):  return (method: .get,
-//                                                            suffixStringURL: "/clientSearch",
-//                                                            responseDataType: .DataArray,
-//                                                            parameters: params)
+        case .loadUserInfoByAccessToken(let params):        return (method: .get,
+                                                                    suffixStringURL: "/users/self",
+                                                                    responseDataType: .DataDictionary,
+                                                                    parameters: params)
+            
+        // API - Comments endpoints
+        case .loadLastCommentByMediaID(let params, let object_id):      return (method: .get,
+                                                                                suffixStringURL: "/media/\(object_id)/comments",
+                                                                                responseDataType: .DataDictionary,
+                                                                                parameters: params)
         }
     }
 }
@@ -57,7 +66,7 @@ final class RestAPIManager {
     func requestDidRun(_ requestType: RequestType, withHandlerResponseAPICompletion handlerResponseAPICompletion: @escaping (ResponseAPI?) -> Void) {
         let requestParameters = requestType.introduced()
         appSuffixStringURL = requestParameters.suffixStringURL
-        
+                
         if (requestParameters.parameters != nil) {
             for (index, dictionary) in requestParameters.parameters!.enumerated() {
                 let key = dictionary.key
