@@ -31,8 +31,8 @@ class FeedsShowViewController: UIViewController {
     
     @IBOutlet weak var collectionView: CollectionView! {
         didSet {
-            collectionView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0)
-            collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(10, 0, 0, 0)
+            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
             
             if (collectionView.collectionViewControllerManager == nil) {
                 collectionView.collectionViewControllerManager = CollectionViewControllerManager.init(withCollectionView: collectionView, andEmptyMessageText: NSLocalizedString("Feeds list is empty", comment: ""))
