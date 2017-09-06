@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Loading More"; ObjectID = "dO1-K7-Cyl"; */
 "dO1-K7-Cyl.text" = "Загрузить ещё";
 
+/* Class = "UILabel"; text = "Internet connection is offline"; ObjectID = "gNt-8v-srX"; */
+"gNt-8v-srX.text" = "Отсутствует\nподключение к Интернету";
+
 /* Class = "UINavigationItem"; title = "Feeds"; ObjectID = "sf7-2s-uJL"; */
 "sf7-2s-uJL.title" = "Ленты";
 

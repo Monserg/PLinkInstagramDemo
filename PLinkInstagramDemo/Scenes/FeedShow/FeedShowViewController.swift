@@ -85,26 +85,35 @@ class FeedShowViewController: UIViewController {
     
     
     // MARK: - Custom Functions
-    func viewSettingsDidLoad() {
+    func viewSettingsDidLoad() {        
         let requestModel = FeedShowModels.Feed.RequestModel()
         interactor?.loadFeed(withRequestModel: requestModel)
     }
     
     func feedDidShow(_ feedDisplayed: FeedDisplayed) {
+        self.feedImageView.image = UIImage.init(named: "image-no-photo")
+        self.feedImageView.contentMode = .center
         feedImageView.kf.indicatorType = .activity
         
-        feedImageView.kf.setImage(with: ImageResource(downloadURL: URL.init(string: feedDisplayed.feed.url)!, cacheKey: feedDisplayed.feed.url),
+        feedImageView.kf.setImage(with: ImageResource(downloadURL: URL.init(string: feedDisplayed.feed.url)!, cacheKey: "\(feedDisplayed.feed.url)_feed"),
                                   placeholder: nil,
                                   options: [.transition(ImageTransition.fade(1)),
                                             .processor(ResizingImageProcessor(referenceSize: feedImageView.frame.size,
                                                                               mode: .aspectFill))],
                                   completionHandler: { image, error, cacheType, imageURL in
-                                    self.feedImageView.kf.cancelDownloadTask()
+//                                    if let imageDownload = image, Connectivity.isConnectedToInternet() {
+//                                        ImageCache.default.store(imageDownload, forKey: "\(feedDisplayed.feed.url)_feed")
+//                                    } else {
+//                                        ImageCache.default.retrieveImage(forKey: "\(feedDisplayed.feed.url)_feed", options: nil) { image, cacheType in
+//                                            if let imageCashed = image {
+//                                                print("Get image \(imageCashed), cacheType: \(cacheType).")
+//                                            } else {
+//                                                print("Not exist in cache.")
+//                                            }
+//                                        }
+//                                    }
                                     
-                                    if image == nil {
-                                        self.feedImageView.image = UIImage.init(named: "image-no-photo")
-                                        self.feedImageView.contentMode = .center
-                                    }
+                                    self.feedImageView.kf.cancelDownloadTask()
         })
         
         if feedDisplayed.feed.likes == 0 {

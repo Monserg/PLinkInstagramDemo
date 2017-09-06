@@ -34,6 +34,12 @@ class FeedShowInteractor: FeedShowBusinessLogic, FeedShowDataStore {
         worker = FeedShowWorker()
         worker?.doSomeWork()
         
+        guard Connectivity.isConnectedToInternet() else {
+            let lastCommentModel = FMDBManager.shared.commentLoad(byMediaID: feed.codeID)
+            next(withText: lastCommentModel?.text)
+            return
+        }
+
         // Get Comments model
         RestAPIManager.shared.requestDidRun(.loadLastCommentByMediaID([fieldAccessToken: user!.accessToken], feed.codeID)) { (responseAPI) in
             if let dataList = responseAPI?.data as? [[String: Any]], dataList.count > 0 {

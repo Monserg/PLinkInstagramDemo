@@ -167,6 +167,30 @@ class FMDBManager: NSObject {
         return commentModel
     }
     
+    func commentLoad(byMediaID mediaID: String) -> Comment? {
+        var commentModel: Comment?
+        
+        if databaseOpen() {
+            let commentQueryLoad = "SELECT * FROM COMMENT WHERE \(fieldMediaID) = '\(mediaID)'"
+//            let commentQueryLoad = "SELECT * FROM COMMENT WHERE \(fieldMediaID)=\(mediaID)"
+            
+            // Execute query and save the results
+            let commentQueryResults = database.executeQuery(commentQueryLoad, withArgumentsIn: [])
+            
+            // Check if there are results
+            if let commentResults = commentQueryResults, commentResults.next() {
+                commentModel = Comment(codeID: commentResults.string(forColumn: fieldCodeID)!,
+                                       mediaID: mediaID,
+                                       text: commentResults.string(forColumn: fieldText)!)
+            }
+            
+            database.close()
+        }
+        
+        // Database don't open
+        return commentModel
+    }
+
     
     // Pagination model
     private func paginationCreate(_ pagination: Pagination) {

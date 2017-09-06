@@ -42,7 +42,7 @@ extension FeedCollectionViewCell: ConfigureCell {
         
         imageView.kf.indicatorType = .activity
         
-        imageView.kf.setImage(with: ImageResource(downloadURL: URL.init(string: imageLink)!, cacheKey: imageLink),
+        imageView.kf.setImage(with: ImageResource(downloadURL: URL.init(string: imageLink)!, cacheKey: "feeds-\(imageLink)"),
                               placeholder: nil,
                               options: [.transition(ImageTransition.fade(1)),
                                         .processor(ResizingImageProcessor(referenceSize: imageView.frame.size,
