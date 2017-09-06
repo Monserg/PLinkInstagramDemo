@@ -94,7 +94,7 @@ class CollectionViewControllerManager: UIViewController {
                 // Refresh Infinite Scrolling view
                 showFooterView(true)
                 
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                     self.handlerInfiniteScrollCompletion!()                    
                     self.showFooterView(false)
                 }

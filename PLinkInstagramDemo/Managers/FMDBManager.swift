@@ -205,7 +205,7 @@ class FMDBManager: NSObject {
         return paginationModel
     }
     
-    private func paginationDelete() {
+    func paginationDelete() {
         if databaseOpen() {
             let paginationQueryDelete = "DELETE FROM PAGINATION"
             

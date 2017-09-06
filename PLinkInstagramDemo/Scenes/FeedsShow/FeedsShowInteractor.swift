@@ -44,6 +44,8 @@ class FeedsShowInteractor: FeedsShowBusinessLogic, FeedsShowDataStore {
                 // Pagination
                 if let pagination = responseAPI?.pagination {
                     _ = FMDBManager.shared.paginationLoad(pagination)
+                } else {
+                    FMDBManager.shared.paginationDelete()
                 }
                 
                 // Feeds

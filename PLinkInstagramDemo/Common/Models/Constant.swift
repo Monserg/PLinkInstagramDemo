@@ -76,5 +76,5 @@ struct INSTAGRAM_IDS {
     static let INSTAGRAM_REDIRECT_URI   =   "http://plink.com.ua"
     static let INSTAGRAM_ACCESS_TOKEN   =   "access_token"
     static let INSTAGRAM_SCOPE          =   "likes+comments+relationships+public_content+follower_list"
-    static let INSTAGRAM_COUNT          =   3
+    static let INSTAGRAM_COUNT          =   16
 }
