@@ -114,7 +114,7 @@ class CollectionViewControllerManager: UIViewController {
             refreshControl = UIRefreshControl()
             refreshControl!.attributedTitle = NSAttributedString(string: NSLocalizedString("Loading Data", comment: ""),
                                                                  attributes: [NSFontAttributeName:  UIFont(name: "Helvetica", size: 12.0)!,
-                                                                              NSForegroundColorAttributeName: UIColor.blue])
+                                                                              NSForegroundColorAttributeName: UIColor.black])
             
             if #available(iOS 10.0, *) {
                 collectionView!.refreshControl = refreshControl!

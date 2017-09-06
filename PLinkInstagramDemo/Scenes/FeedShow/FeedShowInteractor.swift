@@ -50,7 +50,7 @@ class FeedShowInteractor: FeedShowBusinessLogic, FeedShowDataStore {
 
                     do {
                         let lastCommentModel = try Comment(json: json, mediaID: self.feed.codeID)
-                        _ = FMDBManager.shared.commentLoad(lastCommentModel)?.text
+                        _ = FMDBManager.shared.commentLoad(lastCommentModel)
                         self.next(withText: lastCommentModel.text)
                     } catch {
                         print(error.localizedDescription)
