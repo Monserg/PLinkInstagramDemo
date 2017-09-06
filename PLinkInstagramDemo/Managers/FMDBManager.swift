@@ -142,18 +142,11 @@ class FMDBManager: NSObject {
         }
     }
     
-    func commentLoad(withParameters parameters: CommentLoadParameters) -> Comment? {
+    func commentLoad(_ comment: Comment) -> Comment? {
         var commentModel: Comment?
-        var mediaIDValue: String!
         
         if databaseOpen() {
-            if let id = parameters.comment?.codeID {
-                mediaIDValue = id
-            } else if let mediaID = parameters.mediaID {
-                mediaIDValue = mediaID
-            }
-            
-            let commentQueryLoad = "SELECT * FROM COMMENT WHERE \(fieldMediaID) = \(mediaIDValue)"
+            let commentQueryLoad = "SELECT * FROM COMMENT WHERE \(fieldMediaID) = \(comment.mediaID)"
             
             // Execute query and save the results
             let commentQueryResults = database.executeQuery(commentQueryLoad, withArgumentsIn: [])
@@ -161,12 +154,10 @@ class FMDBManager: NSObject {
             // Check if there are results
             if let commentResults = commentQueryResults, commentResults.next() {
                 commentModel = Comment(codeID: commentResults.string(forColumn: fieldCodeID)!,
-                                       mediaID: mediaIDValue,
+                                       mediaID: comment.mediaID,
                                        text: commentResults.string(forColumn: fieldText)!)
             } else {
-                if let comment = parameters.comment {
-                    commentCreate(comment)
-                }
+                commentCreate(comment)
             }
             
             database.close()

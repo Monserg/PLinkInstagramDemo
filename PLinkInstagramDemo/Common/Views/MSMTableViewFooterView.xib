@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MSMTableViewFooterView" customModule="OmnieCommerce" customModuleProvider="target">
+            <connections>
+                <outlet property="emptyMessageLabel" destination="hah-4p-Rxa" id="BhH-wT-FYy"/>
+                <outlet property="emptyView" destination="f5S-2F-Mb4" id="cKX-sc-c4I"/>
+                <outlet property="infiniteScrollView" destination="rDd-CA-coX" id="Cdn-wc-ToN"/>
+                <outlet property="spinner" destination="eMb-UX-SyN" id="m6q-jf-gMQ"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Uyo-JQ-7xf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5S-2F-Mb4" userLabel="Empty Table View">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organizations list is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hah-4p-Rxa" customClass="UbuntuLightVeryLightGrayLabel" customModule="OmnieCommerce" customModuleProvider="target">
+                            <rect key="frame" x="112.5" y="38" width="150" height="14.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="hah-4p-Rxa" firstAttribute="centerX" secondItem="f5S-2F-Mb4" secondAttribute="centerX" id="0lg-CW-9gL"/>
+                        <constraint firstItem="hah-4p-Rxa" firstAttribute="centerY" secondItem="f5S-2F-Mb4" secondAttribute="centerY" multiplier="1.5" id="c0h-OG-ia7"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rDd-CA-coX" userLabel="Infinite Scroll Table View">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="eMb-UX-SyN">
+                            <rect key="frame" x="178" y="8" width="20" height="20"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </activityIndicatorView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading More" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyZ-Uy-3Mz" userLabel="Infinite Label" customClass="UbuntuLightVeryLightGrayLabel" customModule="OmnieCommerce" customModuleProvider="target">
+                            <rect key="frame" x="149.5" y="33" width="77.5" height="14.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="eMb-UX-SyN" firstAttribute="centerY" secondItem="rDd-CA-coX" secondAttribute="centerY" multiplier="0.6" id="CPa-2E-cbX"/>
+                        <constraint firstItem="eyZ-Uy-3Mz" firstAttribute="top" secondItem="eMb-UX-SyN" secondAttribute="bottom" constant="5" id="CjT-zl-0lB"/>
+                        <constraint firstItem="eMb-UX-SyN" firstAttribute="centerX" secondItem="rDd-CA-coX" secondAttribute="centerX" id="G5h-vw-1SG"/>
+                        <constraint firstItem="eyZ-Uy-3Mz" firstAttribute="centerX" secondItem="rDd-CA-coX" secondAttribute="centerX" id="njF-1Z-oeP"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="rDd-CA-coX" secondAttribute="bottom" id="4ML-qo-CJH"/>
+                <constraint firstAttribute="trailing" secondItem="rDd-CA-coX" secondAttribute="trailing" id="LtI-z4-OW5"/>
+                <constraint firstAttribute="trailing" secondItem="f5S-2F-Mb4" secondAttribute="trailing" id="Z5R-hV-Elo"/>
+                <constraint firstItem="rDd-CA-coX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fWK-gt-5Hn"/>
+                <constraint firstAttribute="bottom" secondItem="f5S-2F-Mb4" secondAttribute="bottom" id="g2I-6k-gCm"/>
+                <constraint firstItem="rDd-CA-coX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="t7E-2r-aKn"/>
+                <constraint firstItem="f5S-2F-Mb4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vDq-tL-Rfn"/>
+                <constraint firstItem="f5S-2F-Mb4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yzf-8f-wCF"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
+            </userDefinedRuntimeAttributes>
+        </view>
+    </objects>
+</document>

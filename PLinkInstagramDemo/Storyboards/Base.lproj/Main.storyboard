@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -82,29 +81,9 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InfiniteScrollingFooterView" id="S7E-Cy-GUj">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InfiniteScrollingFooterView" id="wBr-u1-tNA">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <activityIndicatorView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="9eR-Cp-NQ2">
-                                            <rect key="frame" x="169.5" y="5" width="20" height="20"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </activityIndicatorView>
-                                        <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading More" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIN-Ec-4aF" userLabel="Infinite Label">
-                                            <rect key="frame" x="127" y="30" width="105.5" height="20"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="yIN-Ec-4aF" firstAttribute="centerX" secondItem="S7E-Cy-GUj" secondAttribute="centerX" id="7hR-hd-liE"/>
-                                        <constraint firstItem="9eR-Cp-NQ2" firstAttribute="centerY" secondItem="S7E-Cy-GUj" secondAttribute="centerY" multiplier="0.6" id="ieu-01-gSq"/>
-                                        <constraint firstItem="9eR-Cp-NQ2" firstAttribute="centerX" secondItem="S7E-Cy-GUj" secondAttribute="centerX" id="q8p-eT-xPT"/>
-                                        <constraint firstItem="yIN-Ec-4aF" firstAttribute="top" secondItem="9eR-Cp-NQ2" secondAttribute="bottom" constant="5" id="qQy-UR-leE"/>
-                                    </constraints>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>

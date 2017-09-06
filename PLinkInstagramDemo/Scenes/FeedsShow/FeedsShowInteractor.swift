@@ -52,7 +52,7 @@ class FeedsShowInteractor: FeedsShowBusinessLogic, FeedsShowDataStore {
                     var json = [String: Any]()
                     
                     for dictionary in feedJSONs {
-                        if fieldsSet.contains(dictionary.key) {
+                        if feedFieldsSet.contains(dictionary.key) {
                             json[dictionary.key] = dictionary.value
                         }
                     }

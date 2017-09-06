@@ -37,7 +37,8 @@ let fieldMaxID                          =   "max_id"
 let fieldStandardResolution             =   "standard_resolution"
 let fieldURL                            =   "url"
 
-let fieldsSet: Set                      =   [fieldCodeID, fieldImages, fieldHasLiked, fieldLikes, fieldComments]
+let feedFieldsSet: Set                  =   [fieldCodeID, fieldImages, fieldHasLiked, fieldLikes, fieldComments]
+let commentFieldsSet: Set               =   [fieldCodeID, fieldMediaID, fieldText]
 
 
 var user: User? {
@@ -62,7 +63,7 @@ typealias HandlerPassDataCompletion     =   ((_ data: Any?) -> ())
 typealias HandlerSendButtonCompletion   =   (() -> ())
 
 // New Types
-typealias FeedDisplayed                 =   (feed: Feed, text: String)
+typealias FeedDisplayed                 =   (feed: Feed, text: String?)
 typealias CommentLoadParameters         =   (comment: Comment?, mediaID: String?)
 
 

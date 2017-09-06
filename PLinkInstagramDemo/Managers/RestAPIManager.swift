@@ -38,7 +38,7 @@ enum RequestType {
         // API - Comments endpoints
         case .loadLastCommentByMediaID(let params, let object_id):      return (method: .get,
                                                                                 suffixStringURL: "/media/\(object_id)/comments",
-                                                                                responseDataType: .DataDictionary,
+                                                                                responseDataType: .DataArray,
                                                                                 parameters: params)
         }
     }

@@ -91,13 +91,20 @@ class FeedShowViewController: UIViewController {
     }
     
     func feedDidShow(_ feedDisplayed: FeedDisplayed) {
+        feedImageView.kf.indicatorType = .activity
+        
         feedImageView.kf.setImage(with: ImageResource(downloadURL: URL.init(string: feedDisplayed.feed.url)!, cacheKey: feedDisplayed.feed.url),
-                                  placeholder: UIImage.init(named: "image-no-photo"),
+                                  placeholder: nil,
                                   options: [.transition(ImageTransition.fade(1)),
                                             .processor(ResizingImageProcessor(referenceSize: feedImageView.frame.size,
                                                                               mode: .aspectFill))],
                                   completionHandler: { image, error, cacheType, imageURL in
                                     self.feedImageView.kf.cancelDownloadTask()
+                                    
+                                    if image == nil {
+                                        self.feedImageView.image = UIImage.init(named: "image-no-photo")
+                                        self.feedImageView.contentMode = .center
+                                    }
         })
         
         if feedDisplayed.feed.likes == 0 {
@@ -122,7 +129,7 @@ class FeedShowViewController: UIViewController {
             $0.top.equalTo(view).offset(0)
             $0.left.equalTo(view).offset(0)
             $0.right.equalTo(view).offset(0)
-            $0.aspectRatio(3, by: 4, self: contentView)
+            $0.aspectRatio(4, by: 3, self: contentView)
         }
         
         feedImageView.snp.makeConstraints {
@@ -143,9 +150,10 @@ class FeedShowViewController: UIViewController {
         
         // Set Constraints
         lastCommentLabel.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(40)
-            $0.left.equalTo(view).offset(0)
-            $0.right.equalTo(view).offset(0)
+            $0.bottom.equalTo(contentView).offset(40)
+            $0.left.equalTo(view).offset(40)
+            $0.right.equalTo(view).offset(-40)
+            $0.centerX.equalTo(contentView)
         }
         
         viewSettingsDidLoad()

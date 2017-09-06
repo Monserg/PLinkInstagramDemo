@@ -34,13 +34,36 @@ class FeedShowInteractor: FeedShowBusinessLogic, FeedShowDataStore {
         worker = FeedShowWorker()
         worker?.doSomeWork()
         
-        var text: String?
-        
-        if feed.comments > 0 {
-            text = FMDBManager.shared.commentLoad(withParameters: (nil, feed.codeID))?.text
+        // Get Comments model
+        RestAPIManager.shared.requestDidRun(.loadLastCommentByMediaID([fieldAccessToken: user!.accessToken], feed.codeID)) { (responseAPI) in
+            if let dataList = responseAPI?.data as? [[String: Any]], dataList.count > 0 {
+                // Create new Comments object
+                for commentSONs in dataList {
+                    // Filter & create new json
+                    var json = [String: Any]()
+                    
+                    for dictionary in commentSONs {
+                        if commentFieldsSet.contains(dictionary.key) {
+                            json[dictionary.key] = dictionary.value
+                        }
+                    }
+
+                    do {
+                        let lastCommentModel = try Comment(json: json, mediaID: self.feed.codeID)
+                        _ = FMDBManager.shared.commentLoad(lastCommentModel)?.text
+                        self.next(withText: lastCommentModel.text)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            } else {
+                self.next(withText: nil)
+            }
         }
-        
-        let responseModel = FeedShowModels.Feed.ResponseModel(feedDisplayed: (feed, text ?? ""))
-        presenter?.prepareToDisplayFeedComment(fromResponseModel: responseModel)
+    }
+
+    func next(withText text: String?) {
+        let responseModel = FeedShowModels.Feed.ResponseModel(feedDisplayed: (self.feed, text))
+        self.presenter?.prepareToDisplayFeedComment(fromResponseModel: responseModel)
     }
 }
