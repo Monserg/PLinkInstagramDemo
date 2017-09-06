@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PLinkInstagramDemo/Scenes/FeedsShow/FeedsShowViewController.swift"
-            timestampString = "526370623.297737"
+            timestampString = "526373288.657732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "feedsDidLoad(withScrollingData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PLinkInstagramDemo/Scenes/FeedsShow/FeedsShowViewController.swift"
-            timestampString = "526370623.297737"
+            timestampString = "526373288.657732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "feedsDidLoad(withScrollingData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -169,22 +169,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PLinkInstagramDemo/Scenes/FeedsShow/FeedsShowViewController.swift"
-            timestampString = "526370623.297737"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "feedsDidShow()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "PLinkInstagramDemo/Scenes/FeedShow/FeedShowInteractor.swift"
             timestampString = "526361183.154703"
             startingColumnNumber = "9223372036854775807"
@@ -202,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PLinkInstagramDemo/Scenes/FeedsShow/FeedsShowViewController.swift"
-            timestampString = "526370623.297737"
+            timestampString = "526373288.657732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "feedsDidShow()"
             landmarkType = "7">
          </BreakpointContent>
@@ -217,13 +201,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PLinkInstagramDemo/Common/Views/InfiniteScrollingFooterView.swift"
-            timestampString = "526370925.429281"
+            filePath = "PLinkInstagramDemo/Scenes/FeedsShow/FeedsShowViewController.swift"
+            timestampString = "526373145.825001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "prepareConstrains()"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "viewSettingsDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PLinkInstagramDemo/Scenes/FeedsShow/FeedsShowViewController.swift"
+            timestampString = "526373288.657732"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "feedsDidShow()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

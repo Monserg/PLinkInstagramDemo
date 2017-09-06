@@ -99,22 +99,12 @@ class FeedsShowViewController: UIViewController {
     
     // MARK: - Custom Functions
     func viewSettingsDidLoad() {
-        // Load Feeds from FMDB
-        guard Connectivity.isConnectedToInternet() else {
-            self.feedsDidShow()
-            return
-        }
-        
-        // Load Feeds from API
-        feeds = [Feed]()
-
-        FMDBManager.shared.databaseClean()
-        feedsDidLoad(withScrollingData: false)
+        collectionViewDidPullRefresh(withScrollingData: false)
     }
     
     func prepareConstrains() {
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(self.view).inset(UIEdgeInsetsMake(20, 0, 0, 0))
+            $0.edges.equalTo(self.view).inset(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }
     
@@ -149,10 +139,7 @@ class FeedsShowViewController: UIViewController {
         
         // Handler Pull Refresh
         collectionView.collectionViewControllerManager!.handlerPullRefreshCompletion = { _ in
-            // Reload Feeds from API
-            self.feeds = [Feed]()
-            self.feeds = FMDBManager.shared.feedsLoad()
-            self.feedsDidLoad(withScrollingData: true)
+            self.collectionViewDidPullRefresh(withScrollingData: true)
         }
         
         // Handler Infinite Scrolling
@@ -164,7 +151,21 @@ class FeedsShowViewController: UIViewController {
         collectionView.collectionViewControllerManager.pullRefreshDidFinish()
     }
     
+    func collectionViewDidPullRefresh(withScrollingData scrollingData: Bool) {
+        // Load Feeds from FMDB
+        guard Connectivity.isConnectedToInternet() else {
+            self.feedsDidShow()
+            return
+        }
+        
+        // Load Feeds from API
+        feeds = [Feed]()
+        
+        FMDBManager.shared.databaseClean()
+        feedsDidLoad(withScrollingData: scrollingData)
+    }
     
+
     // MARK: - Transition
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView.setNeedsDisplay()

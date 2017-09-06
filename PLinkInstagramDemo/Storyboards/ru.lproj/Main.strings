@@ -1,8 +1,8 @@
 /* (No Commment) */
 "Pxm-7d-PJi.text" = "Метка";
 
-/* Class = "UILabel"; text = "Feeds collection is empty"; ObjectID = "ks3-EK-FiR"; */
-"ks3-EK-FiR.text" = "Коллекция лент пустая";
+/* Class = "UILabel"; text = "Loading More"; ObjectID = "dO1-K7-Cyl"; */
+"dO1-K7-Cyl.text" = "Загрузить ещё";
 
 /* Class = "UINavigationItem"; title = "Feeds"; ObjectID = "sf7-2s-uJL"; */
 "sf7-2s-uJL.title" = "Ленты";

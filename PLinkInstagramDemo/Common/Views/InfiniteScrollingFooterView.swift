@@ -26,14 +26,12 @@ class InfiniteScrollingFooterView: UICollectionReusableView {
     // MARK: - Custom Functions
     func prepareConstrains() {
         activityIndicatorView.snp.makeConstraints {
-            $0.size.equalTo(25)
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(10)
+            $0.center.equalToSuperview()
         }
 
         messageLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(2)
+            $0.bottom.equalToSuperview().offset(0)
         }
     }
 }

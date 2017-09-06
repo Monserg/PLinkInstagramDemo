@@ -181,23 +181,24 @@ class FMDBManager: NSObject {
     func paginationLoad(_ pagination: Pagination?) -> Pagination? {
         var paginationModel: Pagination?
         
-        if pagination != nil {
-            if databaseOpen() {
-                let paginationQueryLoad = "SELECT * FROM PAGINATION"
-                
-                // Execute query and save the results
-                let paginationQueryResults = database.executeQuery(paginationQueryLoad, withArgumentsIn: [])
-                
-                // Check if there are results
-                if let paginationResults = paginationQueryResults, paginationResults.next() {
-                    paginationModel = Pagination(next_max_id: paginationResults.string(forColumn: fieldNextMaxID)!,
-                                                 next_url: paginationResults.string(forColumn: fieldNextURL)!)
-                } else {
+        if databaseOpen() {
+            let paginationQueryLoad = "SELECT * FROM PAGINATION"
+            
+            // Execute query and save the results
+            let paginationQueryResults = database.executeQuery(paginationQueryLoad, withArgumentsIn: [])
+            
+            // Check if there are results
+            if let paginationResults = paginationQueryResults, paginationResults.next() {
+                paginationModel = Pagination(next_max_id: paginationResults.string(forColumn: fieldNextMaxID)!,
+                                             next_url: paginationResults.string(forColumn: fieldNextURL)!)
+            } else {
+                if pagination != nil {
                     paginationCreate(pagination!)
+                    paginationModel = pagination
                 }
-                
-                database.close()
             }
+            
+            database.close()
         }
         
         // Database don't open
